@@ -29,6 +29,11 @@ class Instructor extends Person {
   grade(student, subject) {
     console.log(`${student.name} receives a perfect score on ${subject}`);
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  changeGrade(student) {
+    student.grade += Math.floor(Math.random() * 5) + 1;
+  }
 }
 
 class Student extends Person {
@@ -37,6 +42,7 @@ class Student extends Person {
     this.previousBackground = prop.previousBackground;
     this.className = prop.className;
     this.favSubjects = prop.favSubjects;
+    this.grade = Math.floor(Math.random() * 100) + 1;
   }
 
   listSubjects() {
@@ -49,6 +55,15 @@ class Student extends Person {
 
   sprintChallenge(subject) {
     console.log(`${this.name} has begun has begun sprint challenge on ${subject}`);
+  }
+
+  graduate() {
+    if (this.grade > 70) {
+      console.log(`${this.name} is ready to graduate!`);
+    } else {
+      this.grade += 5;
+      console.log(`Increased ${this.name}'s grade by 5 points.`);
+    }
   }
 }
 
@@ -67,12 +82,3 @@ class ProjectManager extends Instructor {
     console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
   }
 }
-
-const Brit = new Instructor({
-  name: 'Brit',
-  age: 24,
-  location: 'Canada',
-  specialty: 'Javascript',
-  favLanguage: 'CSS',
-  catchPhrase: 'We got this!',
-});
